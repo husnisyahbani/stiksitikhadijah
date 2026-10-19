@@ -8,9 +8,6 @@ class Sitemap extends MY_Controller {
         $this->load->model('Model_common');
         $this->load->model('Model_news');
         $this->load->model('Model_event');
-        $this->load->model('Model_service');
-        $this->load->model('Model_portfolio');
-        $this->load->model('Model_team_member');
 
         $urls = array();
 
@@ -19,9 +16,6 @@ class Sitemap extends MY_Controller {
             'about' => '0.8',
             'news' => '0.9',
             'event' => '0.7',
-            'service' => '0.8',
-            'portfolio' => '0.7',
-            'team' => '0.6',
             'faq' => '0.6',
             'contact' => '0.8',
             'photo-gallery' => '0.5',
@@ -41,18 +35,6 @@ class Sitemap extends MY_Controller {
 
         foreach($this->Model_event->all_event() as $row) {
             $this->add_url($urls, base_url('event/view/'.$row['event_id']), '0.6', 'weekly', $this->format_date($row['event_start_date']));
-        }
-
-        foreach($this->Model_service->all_service() as $row) {
-            $this->add_url($urls, base_url('service/view/'.$row['id']), '0.6', 'monthly');
-        }
-
-        foreach($this->Model_portfolio->get_portfolio_data() as $row) {
-            $this->add_url($urls, base_url('portfolio/view/'.$row['id']), '0.5', 'monthly');
-        }
-
-        foreach($this->Model_team_member->all_team_member() as $row) {
-            $this->add_url($urls, base_url('team-member/'.$row['id']), '0.4', 'monthly');
         }
 
         foreach($this->Model_common->all_categories() as $row) {
