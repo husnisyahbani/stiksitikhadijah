@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /application
+Disallow: /system
+Disallow: /search
+Disallow: /newsletter/
+Disallow: /*?
+
+Sitemap: https://stik-sitikhadijah.ac.id/sitemap.xml

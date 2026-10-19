@@ -1,0 +1,27 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Redirect www and HTTP to the canonical HTTPS domain
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://stik-sitikhadijah.ac.id%{REQUEST_URI} [L,R=301]
+
+# Block direct access to framework and sensitive directories
+RewriteRule ^(application|system|0;777;)(/|$) - [F,L]
+
+# CodeIgniter front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>

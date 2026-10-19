@@ -1,0 +1,22 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local configuration containing credentials
+application/config/database.php
+
+# Runtime files
+application/cache/*
+!application/cache/index.html
+application/logs/*
+!application/logs/index.html
+*.log
+
+# Junk/security artifacts
+0;777;/
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
