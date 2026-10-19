@@ -7,7 +7,6 @@ class Sitemap extends MY_Controller {
     {
         $this->load->model('Model_common');
         $this->load->model('Model_news');
-        $this->load->model('Model_event');
 
         $urls = array();
 
@@ -15,14 +14,10 @@ class Sitemap extends MY_Controller {
             '' => '1.0',
             'about' => '0.8',
             'news' => '0.9',
-            'event' => '0.7',
-            'faq' => '0.6',
             'contact' => '0.8',
             'photo-gallery' => '0.5',
             'pricing' => '0.6',
-            'testimonial' => '0.5',
-            'terms-and-conditions' => '0.3',
-            'privacy-policy' => '0.3'
+            'testimonial' => '0.5'
         );
 
         foreach($static_pages as $path => $priority) {
@@ -31,10 +26,6 @@ class Sitemap extends MY_Controller {
 
         foreach($this->Model_news->all_news() as $row) {
             $this->add_url($urls, base_url('news/view/'.$row['news_id']), '0.7', 'weekly', $this->format_date($row['news_date']));
-        }
-
-        foreach($this->Model_event->all_event() as $row) {
-            $this->add_url($urls, base_url('event/view/'.$row['event_id']), '0.6', 'weekly', $this->format_date($row['event_start_date']));
         }
 
         foreach($this->Model_common->all_categories() as $row) {
